@@ -1,0 +1,25 @@
+{
+    "name": "eliefirst/instagram-feed",
+    "description": "Instagram Feed module for Magento 2 - Hyva compatible",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Elie",
+            "email": "elie@redline.paris"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "magento/framework": ">=103.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Elie\\InstagramFeed\\": ""
+        }
+    }
+}

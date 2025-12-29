@@ -1,0 +1,99 @@
+<?php
+/**
+ * @var \Elie\InstagramFeed\Block\Feed $block
+ */
+if (!$block->isEnabled()) {
+    return;
+}
+
+$posts = $block->getPosts();
+if (empty($posts)) {
+    return;
+}
+?>
+
+<div class="instagram-feed-section py-12" x-data="instagramFeed()">
+    <div class="container mx-auto px-4">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-light mb-2">
+                <a href="<?= $block->escapeUrl($block->getProfileUrl()) ?>" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="hover:text-red-600 transition-colors">
+                    @<?= $block->escapeHtml($block->getUsername()) ?>
+                </a>
+            </h2>
+        </div>
+
+        <!-- Instagram Grid - Asymmetric Layout -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+            <?php foreach ($posts as $index => $post): ?>
+                <?php
+                // Asymmetric grid pattern (like your production)
+                $classes = match($index % 6) {
+                    0 => 'row-span-1 col-span-1', // Standard
+                    1 => 'row-span-2 col-span-1', // Tall
+                    2 => 'row-span-1 col-span-1', // Standard
+                    3 => 'row-span-1 col-span-2', // Wide
+                    4 => 'row-span-1 col-span-1', // Standard
+                    5 => 'row-span-2 col-span-1', // Tall
+                    default => 'row-span-1 col-span-1'
+                };
+                ?>
+                <a href="<?= $block->escapeUrl($post['permalink']) ?>" 
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="instagram-post group relative overflow-hidden bg-gray-100 <?= $classes ?>"
+                   @mouseenter="$el.querySelector('.overlay').classList.add('opacity-100')"
+                   @mouseleave="$el.querySelector('.overlay').classList.remove('opacity-100')">
+                    
+                    <!-- Image -->
+                    <img src="<?= $block->escapeUrl($post['media_url']) ?>" 
+                         alt="<?= $block->escapeHtmlAttr($post['caption'] ?? 'Instagram post') ?>"
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                         loading="lazy">
+                    
+                    <!-- Hover Overlay -->
+                    <div class="overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Follow Button -->
+        <div class="text-center mt-8">
+            <a href="<?= $block->escapeUrl($block->getProfileUrl()) ?>" 
+               target="_blank"
+               rel="noopener noreferrer"
+               class="inline-block bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
+                Follow @<?= $block->escapeHtml($block->getUsername()) ?> on Instagram
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+function instagramFeed() {
+    return {
+        init() {
+            console.log('Instagram Feed loaded');
+        }
+    }
+}
+</script>
+
+<style>
+.instagram-post {
+    min-height: 200px;
+}
+
+@media (min-width: 768px) {
+    .instagram-post {
+        min-height: 300px;
+    }
+}
+</style>
