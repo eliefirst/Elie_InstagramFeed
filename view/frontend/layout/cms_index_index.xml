@@ -8,7 +8,7 @@
                    template="Elie_InstagramFeed::feed.phtml"
                    after="-">
                 <arguments>
-                    <argument name="cache_lifetime" xsi:type="number">3600</argument>
+                    <argument name="cache_lifetime" xsi:type="number">600</argument>
                     <argument name="cache_tags" xsi:type="array">
                         <item name="instagram_feed" xsi:type="string">RL_INSTAGRAM_FEED</item>
                     </argument>

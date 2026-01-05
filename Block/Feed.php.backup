@@ -54,7 +54,7 @@ class Feed extends Template
             self::XML_PATH_LIMIT,
             ScopeInterface::SCOPE_STORE
         );
-        return $limit > 0 ? $limit : 5;
+        return $limit > 0 ? $limit : 6;
     }
 
     private function getInstagramBusinessId(): ?string

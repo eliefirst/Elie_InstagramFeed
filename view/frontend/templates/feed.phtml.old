@@ -1,0 +1,90 @@
+<?php
+/**
+ * @var \Elie\InstagramFeed\Block\Feed $block
+ */
+if (!$block->isEnabled()) {
+    return;
+}
+
+$posts = $block->getPosts();
+if (empty($posts)) {
+    return;
+}
+?>
+
+<div class="instagram-feed-section py-12">
+    <div class="container mx-auto px-4">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-light mb-2 text-red-600">
+                @<?= $block->escapeHtml($block->getUsername()) ?>
+            </h2>
+        </div>
+
+        <!-- Grille Asymétrique Instagram -->
+        <div class="instagram-grid grid grid-cols-2 md:grid-cols-3 gap-3 max-w-4xl mx-auto">
+            <?php foreach (array_slice($posts, 0, 6) as $index => $post): ?>
+                <?php
+                // Pattern asymétrique comme la production
+                $classes = match($index) {
+                    0 => 'row-span-2',     // Grande image haute (gauche)
+                    1 => 'row-span-1',     // Standard (haut centre)
+                    2 => 'row-span-1',     // Standard (haut droite)
+                    3 => 'row-span-1',     // Standard (milieu centre)
+                    4 => 'row-span-2',     // Grande image haute (droite)
+                    5 => 'row-span-1',     // Standard (bas gauche)
+                    default => 'row-span-1'
+                };
+                ?>
+                <a href="<?= $block->escapeUrl($post['permalink']) ?>" 
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="instagram-item <?= $classes ?> block relative overflow-hidden rounded-sm group">
+                    
+                    <img src="<?= $block->escapeUrl($post['media_url']) ?>" 
+                         alt="Instagram RedLine"
+                         class="w-full h-full object-cover transition-all duration-500 ease-out group-hover:opacity-60 group-hover:scale-105"
+                         loading="lazy">
+                    
+                    <!-- Overlay fadeout -->
+                    <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Bouton Follow -->
+        <div class="text-center mt-8">
+            <a href="<?= $block->escapeUrl($block->getProfileUrl()) ?>" 
+               target="_blank"
+               rel="noopener noreferrer"
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.instagram-item {
+    min-height: 180px;
+    background: #f5f5f5;
+}
+
+@media (min-width: 768px) {
+    .instagram-item {
+        min-height: 220px;
+    }
+    
+    .instagram-item.row-span-2 {
+        min-height: 463px; /* 220px * 2 + gap */
+    }
+}
+
+.instagram-grid {
+    grid-auto-rows: minmax(180px, auto);
+}
+
+@media (min-width: 768px) {
+    .instagram-grid {
+        grid-auto-rows: minmax(220px, auto);
+    }
+}
+</style>
