@@ -17,14 +17,14 @@ Module Instagram Feed pour Magento 2.4.8 - Compatible Hyva Theme & PHP 8.4
 ```bash
 composer config repositories.elie-instagram vcs https://github.com/eliefirst/Elie_InstagramFeed.git
 composer require eliefirst/instagram-feed:dev-main
-php bin/magento module:enable Elie_InstagramFeed
+php bin/magento module:enable ElielWeb_InstagramFeed
 php bin/magento setup:upgrade
 php bin/magento cache:clean
 ```
 
 ## Configuration
 
-**Admin Panel**: Stores → Configuration → ElielWeb Extensions → Instagram Feed
+**Admin Panel**: Stores → Configuration → ElielWeb → Instagram Feed
 
 - Enable Instagram Feed: Yes
 - Instagram Username: your_username

@@ -6,7 +6,7 @@
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Elie_InstagramFeed::config" title="Instagram Feed Configuration" />
+                            <resource id="ElielWeb_InstagramFeed::config" title="Instagram Feed Configuration" />
                         </resource>
                     </resource>
                 </resource>

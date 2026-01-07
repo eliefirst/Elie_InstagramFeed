@@ -3,9 +3,9 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="Elie\InstagramFeed\Block\Feed" 
-                   name="instagram.feed" 
-                   template="Elie_InstagramFeed::feed.phtml"
+            <block class="ElielWeb\InstagramFeed\Block\Feed"
+                   name="instagram.feed"
+                   template="ElielWeb_InstagramFeed::feed.phtml"
                    after="-">
                 <arguments>
                     <argument name="cache_lifetime" xsi:type="number">600</argument>
