@@ -15,8 +15,8 @@ Module Instagram Feed pour Magento 2.4.8 - Compatible Hyva Theme & PHP 8.4
 
 ## Installation
 ```bash
-composer config repositories.elie-instagram vcs https://github.com/eliefirst/Elie_InstagramFeed.git
-composer require eliefirst/instagram-feed:dev-main
+composer config repositories.elielweb-instagram vcs https://github.com/eliefirst/Elie_InstagramFeed.git
+composer require elielweb/instagram-feed:dev-main
 php bin/magento module:enable ElielWeb_InstagramFeed
 php bin/magento setup:upgrade
 php bin/magento cache:clean
