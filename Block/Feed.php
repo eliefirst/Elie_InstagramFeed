@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Elie\InstagramFeed\Block;
+namespace ElielWeb\InstagramFeed\Block;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;

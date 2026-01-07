@@ -13,6 +13,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Elie_InstagramFeed',
+    'ElielWeb_InstagramFeed',
     __DIR__
 );
